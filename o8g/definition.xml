@@ -21,6 +21,7 @@
       <script src="Scripts/autoscripts.py" />
       <script src="Scripts/generic.py" />
       <script src="Scripts/meta.py" />
+      <script src="Scripts/classes.py" />
       <script src="Scripts/CardScripts.py" />
    </scripts>
    <fonts>
