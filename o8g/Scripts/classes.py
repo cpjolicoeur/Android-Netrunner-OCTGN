@@ -91,17 +91,21 @@ class DeckValidator(object):
 
     # animation bug hack
     if len(players) > 1: random = rnd(1,100)
-    debugNotify("### About to move cards to trash.", 5)
-    # Use hidden archives to opponent cant see card while we check it
-    trash = me.piles['Archives(Hidden)']
-    if len(players) > 1: random = rnd(1,100)
-    for card in self.deck: card.moveTo(trash)
 
+    # Create a cover card to hide the deck while we process them
+    cover = table.create(staticCardsDict["accessCover"],0,0,1,False) # Dont persist this card
+    cover.moveTo(me.piles['R&D/Stack'])
+    # Turn cards face up so we can read their properties
+    for card in self.deck: card.isFaceUp = True
+
+    # Now process each card
     debugNotify("### About to check each card in the deck", 5)
     for card in trash: self.__processCard(card)
 
-    debugNotify("### About to move cards back from trash.", 5)
-    for card in trash: card.moveToBottom(self.deck)
+    # Turn cards back face down
+    for card in self.deck: card.isFaceUp = False
+    # Remove the cover card
+    cover.moveTo(shared.exile) # we cannot delete cards so we just hide it.
 
     if 'corp' == self.side: self.__verifyAgendaPoints()
     self.__verifyInfluencePoints()

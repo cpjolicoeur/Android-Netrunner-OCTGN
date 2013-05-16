@@ -149,3 +149,8 @@ InactiveColor = "#888888" # Cards which are in play but not active yer (e.g. see
 
 Xaxis = 'x'
 Yaxis = 'y'
+
+# A dictionary to hold GUID's of cards we need to reference so we dont have to reference the GUID's
+# in various places of the code as magic numbers
+staticCardsDict = dict(
+  accessCover  = "ac3a3d5d-7e3a-4742-b9b2-7f72596d9c1b")
