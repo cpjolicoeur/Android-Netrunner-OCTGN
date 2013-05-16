@@ -33,11 +33,11 @@ mdict = dict( # A dictionary which holds all the hard coded markers (in the mark
              Cloud =                   ("Cloud", "5f58fb37-e44d-4620-8093-3b7378fb5f57"),
              BaseLink =                ("Base Link", "2fb5b6bb-31c5-409c-8aa6-2c46e971a8a5"))
 
-             
-regexHooks = dict( # A dictionary which holds the regex that then trigger each core command. 
+
+regexHooks = dict( # A dictionary which holds the regex that then trigger each core command.
                    # This is so that I can modify these "hooks" only in one place as I add core commands and modulators.
                    # We use "[:\$\|]" before all hooks, because we want to make sure the script is a core command, and nor part of a modulator (e.g -traceEffects)
-                  GainX =              re.compile(r'(?<![<,+-])(Gain|Lose|SetTo)([0-9]+)'), 
+                  GainX =              re.compile(r'(?<![<,+-])(Gain|Lose|SetTo)([0-9]+)'),
                   CreateDummy =        re.compile(r'(?<![<,+-])CreateDummy'),
                   ReshuffleX =         re.compile(r'(?<![<,+-])Reshuffle([A-Za-z& ]+)'),
                   RollX =              re.compile(r'(?<![<,+-])Roll([0-9]+)'),
@@ -59,12 +59,12 @@ regexHooks = dict( # A dictionary which holds the regex that then trigger each c
 
 specialHostPlacementAlgs = { # A Dictionary which holds tuples of X and Y placement offsets, for cards which place their hosted cards differently to normal, such as Personal Workshop
                               'Personal Workshop' :            (-32,0)}
-                           
-                  
+
+
 automatedMarkers = [] #Used in the Inspect() command to let the player know if the card has automations based on the markers it puts out.
 
 place = dict( # A table holding tuples with the original location various card types are expected to start their setup
-            Hardware =              (100, -208, 10, 3, 1),  # 1st value is X, second is Y third is Offset (i.e. how far from the other cards (in pixel size) each extra copy should be played. Negative values means it will fall on top of the previous ones slightly) 
+            Hardware =              (100, -208, 10, 3, 1),  # 1st value is X, second is Y third is Offset (i.e. how far from the other cards (in pixel size) each extra copy should be played. Negative values means it will fall on top of the previous ones slightly)
             Program =               (-7, -220, 10, 10, -1), # 4th value is Loop Limit (i.e. at how many cards after the first do we loop back to the first position. Loop is always slightly offset, so as not to hide the previous ones completely)
             Resource =              (-6, -345, 10, 10, -1), # Last value is wether the cards will be placed towards the right or left. -1 means to the left.
             Event =                 (480, -190, 20, 2, 1),
@@ -78,7 +78,7 @@ place = dict( # A table holding tuples with the original location various card t
             Asset =                 (-10, 248, -30, 13, -1), # Temporary.
             Agenda =                (-10, 248, -30, 13, -1) # Temporary.
             )
-               
+
 markerRemovals = { # A dictionary which holds the costs to remove various special markers.
                        # The costs are in a tuple. First is clicks cost and then is credit cost.
                      'Fang' :                        (1,2),
@@ -96,25 +96,25 @@ CorporateFactions = [
          'The Weyland Consortium',
          'NBN',
          'Jinteki']
-         
+
 RunnerFactions = [
          'Anarch',
          'Shaper',
          'Criminal']
- 
+
 CorporationCardTypes = [
          'ICE',
          'Asset',
          'Agenda',
          'Upgrade',
          'Operation']
-         
+
 RunnerCardTypes = [
          'Program',
          'Hardware',
          'Resource',
          'Event']
-         
+
 SpecialDaemons = [ # These are cards which can host programs and avoid their MU cost, but don't have the daemon keyword
          'Dinosaurus'] # Not in use yet.
 
@@ -127,7 +127,7 @@ IgnoredModulators = [ # These are modulators to core commands that we do not wan
                'excludeDummy',
                'onlyforDummy',
                'isCost']
-               
+
 trashEasterEgg = [
    "You really shouldn't try to trash this kind of card.",
    "No really, stop trying to trash this card. You need it.",
@@ -138,7 +138,7 @@ trashEasterEgg = [
    "Shit's just got real!",
    "Careful what you wish for..."]
 trashEasterEggIDX = 0
- 
+
 ScoredColor = "#00ff44"
 SelectColor = "#009900"
 EmergencyColor = "#ff0000"
