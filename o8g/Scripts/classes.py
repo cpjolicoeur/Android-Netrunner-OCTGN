@@ -105,6 +105,7 @@ class DeckValidator(object):
 
     if 'corp' == self.side: self.__verifyAgendaPoints()
     self.__verifyInfluencePoints()
+    # TODO: verify we dont have more than 3 copies of any single card in the deck
     self.__setDeckStats()
 
     if self.isValid: notify("-> Deck of {} is OK!".format(me))
