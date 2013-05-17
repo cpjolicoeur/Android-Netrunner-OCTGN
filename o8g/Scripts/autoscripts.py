@@ -854,7 +854,7 @@ def redirect(Autoscript, card, announceText = None, notificationType = 'Quick', 
       if ModifyStatus(Autoscript, announceText, card, targetC, notification = notificationType, n = X) == 'ABORT': return
    elif regexHooks['SimplyAnnounce'].search(Autoscript):
       SimplyAnnounce(Autoscript, announceText, card, targetC, notification = notificationType, n = X)
-   eldebugNotify("#### No regexhook match! :(") # Debug
+   else: debugNotify("#### No regexhook match! :(") # Debug
    debugNotify("### Loop for scipt {} finished".format(Autoscript), 2)
    return X
 
@@ -2011,7 +2011,7 @@ def findTarget(Autoscript, fromHand = False, card = None): # Function for findin
                   if not targetLookup in foundTargets: 
                      debugNotify("### About to append {}".format(targetLookup), 3) #Debug
                      foundTargets.append(targetLookup) # I don't know why but the first match is always processed twice by the for loop.
-               eldebugNotify("### findTarget() Rejected {}".format(targetLookup), 3)# Debug
+               else: debugNotify("### findTarget() Rejected {}".format(targetLookup), 3)# Debug
          debugNotify("### Finished seeking. foundTargets List = {}".format([T.name for T in foundTargets]), 2)
          if re.search(r'DemiAutoTargeted', Autoscript):
             debugNotify("### Checking DemiAutoTargeted switches", 2)# Debug
@@ -2114,7 +2114,7 @@ def prepareRestrictions(Autoscript, seek = 'target'):
             else: 
                debugNotify("### Valid Target", 4) #Debug
                targetGroups[iter][0].append(chkCondition) # Else just move the individual condition to the end if validTargets list
-   eldebugNotify("### No restrictions regex", 2) #Debug 
+   else: debugNotify("### No restrictions regex", 2) #Debug
    debugNotify("<<< prepareRestrictions() by returning: {}.".format(targetGroups), 3)
    return targetGroups
 
@@ -2137,13 +2137,13 @@ def checkCardRestrictions(cardPropertyList, restrictionsList):
             if not validtargetCHK in cardPropertyList: 
                debugNotify("### {} not found in {}".format(validtargetCHK,cardPropertyList), 4) #Debug
                validCard = False
-      eldebugNotify("### No positive restrictions", 4)
+      else: debugNotify("### No positive restrictions", 4)
       if len(restrictionsList) > 0 and len(restrictionsGroup[1]) > 0: # If we have no target restrictions, any selected card will do as long as it's a valid target.
          for invalidtargetCHK in restrictionsGroup[1]:
             debugNotify("### Checking for invalid match on {}".format(invalidtargetCHK), 4) #Debug
             if invalidtargetCHK in cardPropertyList: validCard = False
-      eldebugNotify("### No negative restrictions", 4)
       if validCard: break # If we already passed a restrictions check, we don't need to continue checking restrictions 
+      else: debugNotify("### No negative restrictions", 4)
    debugNotify("<<< checkCardRestrictions() with return {}".format(validCard)) #Debug
    return validCard
 
@@ -2168,9 +2168,9 @@ def checkSpecialRestrictions(Autoscript,card):
       debugNotify("### Marker Name: {}".format(markerNeg.group(1)), 2)# Debug
       marker = findMarker(card, markerNeg.group(1))
       if marker: validCard = False
-   eldebugNotify("### No marker restrictions.", 4)
    propertyReq = re.search(r'-hasProperty{([\w ]+)}(eq|le|ge|gt|lt)([0-9])',Autoscript) 
    # Checking if the target needs to have a property at a certiain value. 
+   else: debugNotify("### No marker restrictions.", 4)
    # eq = equal, le = less than/equal, ge = greater than/equal, lt = less than, gt = greater than.
    if propertyReq:
       if propertyReq.group(2) == 'eq' and card.properties[propertyReq.group(1)] != propertyReq.group(3): validCard = False
